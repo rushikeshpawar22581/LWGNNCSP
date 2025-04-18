@@ -24,7 +24,7 @@ def load_model_and_scaler(model_dir_prefix, model_type_trial, model_config):
     loads model and scaler
 
     Args:
-    model_dir_prefix: str, path to model directory+ prefix, eg "../schnet/schnet_kgcnn" 
+    model_dir_prefix: str, path to model directory+ prefix, eg "./schnet/model/schnet_kgcnn" 
     model_type_trial: str: eg M1_trial1, M2_trial5
     model_config: dict, model configuration
 
@@ -59,7 +59,7 @@ class SingleCrystalDataset(CrystalDataset):
     def __init__(self, cif_dir, methods):
         '''
         Args:
-        cif_dir: str, path to cif file eg "./data/test_single_cif/cif_files/t0.cif"
+        cif_dir: str, path to cif file eg "./schnet/data/test_single_cif/cif_files/t0.cif"
         methods: list of str, methods to be set for the dataset
         '''
         super(SingleCrystalDataset, self).__init__(data_directory=None,
@@ -142,8 +142,8 @@ def predict_energy(cif_dir:str, model_dir_prefix:str, model_type_trial:str, mode
     Predicts energy of a single crystal structure
 
     Args:
-    cif_dir: str, path to cif file eg "./data/test_single_cif/cif_files/t0.cif"
-    model_dir_prefix: str, path to model directory+ prefix, eg "../schnet/schnet_kgcnn" 
+    cif_dir: str, path to cif file eg "./schnet/data/test_single_cif/cif_files/t0.cif"
+    model_dir_prefix: str, path to model directory+ prefix, eg "./schnet/model/schnet_kgcnn" 
     model_type_trial: str: eg M1_trial1, M2_trial5
     model_config: dict, model configuration
     methods: list of str, methods to be set for the dataset
@@ -193,7 +193,7 @@ def predict_energy_with_model_scaler(model:ks.Model, scaler:StandardLabelScaler,
     Predicts energy of a single crystal structure
 
     Args:
-    cif_dir: str, path to cif file eg "./data/test_single_cif/cif_files/t0.cif"
+    cif_dir: str, path to cif file eg "./schnet/data/test_single_cif/cif_files/t0.cif"
     model: keras model
     scaler: deserialized scaler object
     model_config: dict, model configuration
@@ -219,8 +219,8 @@ def predict_energy_with_model_scaler(model:ks.Model, scaler:StandardLabelScaler,
 
 if __name__ == "__main__":
 
-    cif_dir = "./data/matbench_allcifs_unperturbed_testremoved/cif_files/t0.cif"
-    model_dir_prefix = "./schnet/schnet_kgcnn"
+    cif_dir = "./schnet/data/matbench_allcifs_unperturbed_testremoved/cif_files/t0.cif"
+    model_dir_prefix = "./schnet/model/schnet_kgcnn"
     model_type_trial = "M1_trial1"
 
     # required for deserializing model and validating dataset

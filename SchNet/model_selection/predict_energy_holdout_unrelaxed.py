@@ -103,7 +103,7 @@ def load_model_and_scaler(model_dir_prefix, model_type_trial, model_config= mode
     loads model and scaler
 
     Args:
-    model_dir_prefix: str, path to model directory+ prefix, eg "../schnet/schnet_kgcnn" 
+    model_dir_prefix: str, path to model directory+ prefix, eg "../schnet/model/schnet_kgcnn" 
     model_type_trial: str: eg M1_trial1, M2_trial5
     model_config: dict, model configuration
 

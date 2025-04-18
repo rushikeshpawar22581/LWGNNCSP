@@ -151,7 +151,7 @@ def load_model_and_scaler(model_dir_prefix, model_type_trial):
     loads model and scaler
 
     Args:
-    model_dir_prefix: str, path to model directory+ prefix, eg "../schnet/model/schnet_kgcnn" 
+    model_dir_prefix: str, path to model directory+ prefix, eg "../model/schnet_kgcnn" 
     model_type_trial: str: eg M1_trial1, M2_trial5
 
     these two args will form the path to model by concatenating them as f"{model_dir_prefix}_{model_type_trial}"
@@ -167,10 +167,10 @@ def load_model_and_scaler(model_dir_prefix, model_type_trial):
     model: keras model
     scaler: deserialized scaler object
     '''
-    model_dir_prefix = f"../schnet/model/schnet_kgcnn_{model_type_trial}"
+    model_dir = f"{model_dir_prefix}_{model_type_trial}"
     model = deserialize_model(model_config)
-    model.load_weights(f"{model_dir_prefix}/models/best_model_{model_type_trial}.weights.h5")
-    with open(f"{model_dir_prefix}/models/scaler.json", "r") as f:
+    model.load_weights(f"{model_dir}/models/best_model_{model_type_trial}.weights.h5")
+    with open(f"{model_dir}/models/scaler.json", "r") as f:
         scaler = deserialize_scaler(json.load(f))
     
     return model, scaler
@@ -180,7 +180,7 @@ def predict_energy(model_dir_prefix, model_type_trial, dataset):
     Predicts formation energy of data using trained model
 
     Args:
-    model_dir_prefix: str, path to model directory+ prefix, eg "../schnet_kgcnn_M1_trial1" 
+    model_dir_prefix: str, path to model directory+ prefix, eg "../model/schnet_kgcnn_M1_trial1" 
     model_type_trial: str: eg M1_trial1, M2_trial5
     dataset: CrystalDataset object
 
@@ -192,7 +192,7 @@ def predict_energy(model_dir_prefix, model_type_trial, dataset):
     
     y_pred = np.array([])
 
-    for i in range(14):
+    for i in range(14): # can be changed based on available GPU memory
         # load  data
         print(f"Loading data from {10000*i}:{10000*(i+1)}")
         x = dataset[10000*i:10000*(i+1)].tensor(model_config["config"]["inputs"])  
@@ -233,7 +233,7 @@ if __name__ == "__main__":
     print("Seperating data...")
     seperate_data(data_path, output_path)
 
-    model_dir_prefix = "../schnet/model/schnet_kgcnn"
+    model_dir_prefix = "../model/schnet_kgcnn"
     model_type_trial = "M1_trial1"
 
     # load perturbed dataset
