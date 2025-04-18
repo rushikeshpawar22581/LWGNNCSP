@@ -1,4 +1,4 @@
-# Description: Train a SchNet model with KGCNN on the matbench dataset with unperturbed structures and test set removed.
+# Description: Train a SchNet model with KGCNN on the given dataset
 # Author: Rushikesh Pawar (date: 13th dec 2024)
 # Reference: https://github.com/aimat-lab/gcnn_keras/blob/master/training/train_graph.py#L16 
 import os
